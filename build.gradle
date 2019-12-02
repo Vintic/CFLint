@@ -84,6 +84,8 @@ dependencies {
     }
     // https://mvnrepository.com/artifact/commons-io/commons-io
     compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    // https://mvnrepository.com/artifact/com.github.florianingerl.util/regex
+    compile group: 'com.github.florianingerl.util', name: 'regex', version: '1.1.8'
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

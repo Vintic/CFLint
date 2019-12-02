@@ -1465,6 +1465,10 @@ public class CFLint implements IErrorReporter {
         return bugs;
     }
 
+    public void setBugs(BugList bugs) {
+        this.bugs = bugs;
+    }
+
     public List<String> getAllowedExtensions() {
         return allowedExtensions;
     }

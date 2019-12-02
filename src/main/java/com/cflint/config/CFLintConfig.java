@@ -20,7 +20,7 @@ public class CFLintConfig extends BaseConfig {
 
     private List<CFLintPluginInfo.PluginInfoRule> rules = new ArrayList<>();
     private List<PluginMessage> excludes = new ArrayList<>();
-    private List<PluginMessage> includes = new ArrayList<>();
+    public List<PluginMessage> includes = new ArrayList<>();
     private HashMap<String,Object> parameters = new HashMap<>();
 
     private boolean inheritParent = true;

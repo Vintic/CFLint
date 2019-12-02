@@ -50,7 +50,7 @@ public class Context {
     private final List<ContextMessage> messages = new ArrayList<>();
     private Context parent = null;
     private List<String> ignores = new ArrayList<>();
-    final private CFLintConfiguration configuration;
+    public final CFLintConfiguration configuration;
 
     public Context(final String filename, final Element element, final CFIdentifier functionName,
             final boolean inAssignmentExpression, final StackHandler handler,CFLintConfiguration configuration) {

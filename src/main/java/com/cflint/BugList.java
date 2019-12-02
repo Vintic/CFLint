@@ -50,6 +50,16 @@ public class BugList implements Iterable<BugInfo> {
         }
     }
 
+    public void remove(String bugName, String variable_name) {
+        List<BugInfo> bugList = bugs.get(bugName);
+        bugList.removeIf(bugInfo -> bugInfo.getVariable().equalsIgnoreCase(variable_name));
+        /*if(bugList.isEmpty()){
+            bugs.remove(bugName);
+        }else {*/
+            bugs.replace(bugName, bugList);
+        /*}*/
+    }
+
     /**
      * Returns a list of bugs as a map.
      *
@@ -57,6 +67,10 @@ public class BugList implements Iterable<BugInfo> {
      */
     public Map<String, List<BugInfo>> getBugList() {
         return bugs;
+    }
+
+    public void setBugList(Map<String, List<BugInfo>> bugs) {
+        this.bugs = bugs;
     }
 
     public int size() {

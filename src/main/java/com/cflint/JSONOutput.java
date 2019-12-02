@@ -38,7 +38,6 @@ public class JSONOutput extends StructuredOutput {
      * Output bug list in JSON format.
      */
     public void output(final BugList bugList, final Writer writer, final CFLintStats stats) throws IOException {
-        final BugCounts counts = stats.getCounts();
         final JsonFactory jsonF = new JsonFactory();
         final JsonGenerator jg = jsonF.createGenerator(writer);
 
@@ -46,6 +45,10 @@ public class JSONOutput extends StructuredOutput {
             jg.useDefaultPrettyPrinter();
         }
 
+        BugCounts counts = null;
+        if(stats.getCounts().noBugs!=0) {
+            counts = stats.getCounts();
+        }
         outputStart(stats, jg);
         outputStartIssues(jg);
 
@@ -73,7 +76,9 @@ public class JSONOutput extends StructuredOutput {
         }
         
         outputCloseIssues(jg);
-        outputCounts(stats, counts, jg);
+        if(stats.getCounts().noBugs!=0) {
+            outputCounts(stats, counts, jg);
+        }
         outputEnd(jg);
         writer.close();
     }

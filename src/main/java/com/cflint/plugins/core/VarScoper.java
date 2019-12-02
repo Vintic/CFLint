@@ -18,6 +18,11 @@ import cfml.parsing.cfscript.script.CFPropertyStatement;
 import cfml.parsing.cfscript.script.CFScriptStatement;
 import net.htmlparser.jericho.Element;
 
+import java.io.File;
+import java.util.*;
+
+import static com.cflint.tools.FileUtil.checkExtension;
+
 public class VarScoper extends CFLintScannerAdapter {
 
     public static final String VARIABLE = "variable";
@@ -34,10 +39,10 @@ public class VarScoper extends CFLintScannerAdapter {
 
     @Override
     public void expression(final CFExpression expression, final Context context, final BugList bugs) {
-        if (expression instanceof CFIdentifier) {
+        if (checkExtension(new File(context.getFilename()), Collections.singletonList("cfc")) && expression instanceof CFIdentifier) {
             // No issue
             if (expression instanceof CFFullVarExpression
-                    && ((CFFullVarExpression) expression).getExpressions().size() > 1) {
+                && ((CFFullVarExpression) expression).getExpressions().size() > 1) {
                 // Visit the first in the expression.
                 expression(((CFFullVarExpression) expression).getExpressions().get(0), context, bugs);
                 return;
@@ -87,7 +92,7 @@ public class VarScoper extends CFLintScannerAdapter {
         final String name = element.getName();
         final int line = element.getSource().getRow(element.getBegin());
         int offset = element.getBegin();
-        if (name != null && name.trim().length() > 0 && context.isInFunction()) {
+        if (checkExtension(new File(context.getFilename()), Collections.singletonList("cfc")) && name != null && name.trim().length() > 0 && context.isInFunction() && !name.startsWith("@")) {
             if (checkNames.contains(name.toLowerCase())) {
                 offset = element.getAttributes().get(CF.NAME) != null ? element.getAttributes().get(CF.NAME).getValueSegment().getBegin() : offset;
                 assertVariable(element, context, bugs, element.getAttributeValue(CF.NAME), line, offset);
@@ -106,7 +111,7 @@ public class VarScoper extends CFLintScannerAdapter {
     protected void assertVariable(final Element element, final Context context, final BugList bugs,
                                   final String inameVar, int line, int offset) {
         final String nameVar = inameVar == null ? null : inameVar.split("\\.")[0].split("\\[")[0];
-        if (nameVar != null && !context.getCallStack().checkVariable(nameVar) && !isGlobal(nameVar)) {
+        if (nameVar != null && !context.getCallStack().checkVariable(nameVar) && !isGlobal(nameVar) && !nameVar.startsWith("@")) {
             context.addMessage("MISSING_VAR", inameVar, line, offset);
         }
     }

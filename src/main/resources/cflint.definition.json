@@ -444,6 +444,57 @@
             ]
         },
         {
+            "name": "LSTimeFormatChecker",
+            "className": "FunctionXChecker",
+            "message": [
+                {
+                    "code": "AVOID_USING_LSTIMEFORMAT",
+                    "messageText": "Avoid using the ${functionName} function in production code.",
+                    "severity": "INFO"
+                }
+            ],
+            "parameter": [
+                {
+                    "name": "functionName",
+                    "value": "LSTimeFormat"
+                }
+            ]
+        },
+        {
+            "name": "LSParseDateTimeChecker",
+            "className": "FunctionXChecker",
+            "message": [
+                {
+                    "code": "AVOID_USING_LSPARSEDATETIME",
+                    "messageText": "Avoid using the ${functionName} function in production code.",
+                    "severity": "INFO"
+                }
+            ],
+            "parameter": [
+                {
+                    "name": "functionName",
+                    "value": "LSParseDateTime"
+                }
+            ]
+        },
+        {
+            "name": "LSDateFormatChecker",
+            "className": "FunctionXChecker",
+            "message": [
+                {
+                    "code": "AVOID_USING_LSDATEFORMAT",
+                    "messageText": "Avoid using the ${functionName} function in production code.",
+                    "severity": "INFO"
+                }
+            ],
+            "parameter": [
+                {
+                    "name": "functionName",
+                    "value": "LSDateFormat"
+                }
+            ]
+        },
+        {
             "name": "StructNewChecker",
             "className": "FunctionXChecker",
             "message": [
@@ -531,7 +582,7 @@
                 {
                     "code": "VAR_INVALID_NAME",
                     "severity": "INFO",
-                    "messageText": "Variable ${variable} is not a valid name. Please use ${case} or underscores."
+                    "messageText": "Variable ${variable} is not a valid name. Please use this pattern [A-Za-z0-9_#]."
                 },
                 {
                     "code": "VAR_ALLCAPS_NAME",
@@ -612,7 +663,7 @@
                 {
                     "code": "ARGUMENT_INVALID_NAME",
                     "severity": "INFO",
-                    "messageText": "Argument ${variable} is not a valid name. Please use ${case} or underscores."
+                    "messageText": "Argument ${variable} is not a valid name. Please use this pattern [A-Za-z0-9_#]."
                 },
                 {
                     "code": "ARGUMENT_ALLCAPS_NAME",
@@ -671,7 +722,7 @@
                 {
                     "code": "METHOD_INVALID_NAME",
                     "severity": "INFO",
-                    "messageText": "Method name ${function} is not a valid name. Please use ${case} or underscores."
+                    "messageText": "Method name ${function} is not a valid name. Please use this pattern [A-Za-z0-9_#]."
                 },
                 {
                     "code": "METHOD_ALLCAPS_NAME",
@@ -730,7 +781,7 @@
                 {
                     "code": "COMPONENT_INVALID_NAME",
                     "severity": "INFO",
-                    "messageText": "Component name ${component} is not a valid name. Please use ${case} and start with a capital letter."
+                    "messageText": "Component name ${component} is not a valid name. Please use this pattern [A-Za-z0-9_#]."
                 },
                 {
                     "code": "COMPONENT_ALLCAPS_NAME",
@@ -899,17 +950,6 @@
             "parameter": []
         },
         {
-            "name": "SelectStarChecker",
-            "message": [
-                {
-                    "code": "SQL_SELECT_STAR",
-                    "messageText": "Avoid using 'select *' in a query.",
-                    "severity": "WARNING"
-                }
-            ],
-            "parameter": []
-        },
-        {
             "name": "CFQueryChecker",
             "message": [
                 {
@@ -998,6 +1038,228 @@
                     "severity": "WARNING"
                 }
             ]
+        },
+        {
+            "name": "DataFormatChecker",
+            "message": [
+                {
+                    "code": "USE_MTEAM_DATA_FORMAT",
+                    "messageText": "Use MTeam data format. LS/PARSE/DATE/TIME('HH:mm:ss dd-MM-yyyy'). Your is ${variable}",
+                    "severity": "WARNING"
+                }
+            ],
+            "parameter": []
+        },
+        {
+            "name": "QueryParamDeprecatedChecker",
+            "message": [
+                {
+                    "code": "NOT_VALID_CFQUERYPARAM",
+                    "messageText": "Your CFQUERYPARAM not exist.",
+                    "severity": "WARNING"
+                }
+            ],
+            "parameter": []
+        },
+        {
+            "name": "EndTagChecker",
+            "message": [
+                {
+                    "messageText": "End tag not found.",
+                    "code": "USE_END_TAG",
+                    "severity": "INFO"
+                }
+            ],
+            "parameter": []
+        },
+        {
+            "name": "UnusedApplicationVarChecker",
+            "className": "UnusedApplicationVarChecker",
+            "message": [
+                {
+                    "code": "UNUSED_GLOBAL_VARIABLE",
+                    "severity": "INFO",
+                    "messageText": "Global variable ${variable} is not used. Consider removing it."
+                }
+            ],
+            "parameter": [
+                {
+                    "name": "usedTagAttributes",
+                    "value": [
+                        "cfquery/name",
+                        "cfloop/index",
+                        "cfloop/item",
+                        "cfchart/name",
+                        "cfdocument/name",
+                        "cfftp/name",
+                        "cfhtmltopdf/name",
+                        "cfhttp/resultname",
+                        "cfimage/name",
+                        "cfimap/name",
+                        "cfldap/name",
+                        "cfoutput/query",
+                        "cfpdf/name",
+                        "cfreport/name",
+                        "cfsavecontent/name",
+                        "cfstoreproc/result",
+                        "cfxml/variable"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "QueryInjectionChecker",
+            "message": [
+                {
+                    "code": "USE_CFQUERYPARAM",
+                    "messageText": "Use <cfqueryparam ...> tag.",
+                    "severity": "WARNING"
+                }
+            ],
+            "parameter": []
+        },
+        {
+            "name": "SessionInJob",
+            "message": [
+                {
+                    "code": "AVOID_SESSION_IN_JOB",
+                    "messageText": "Avoid using 'SESSION' vars in a 'schedule' directory.",
+                    "severity": "WARNING"
+                }
+            ],
+            "parameter": []
+        },
+        {
+            "name": "QueryDatasourceChecker",
+            "message": [
+                {
+                    "code": "AVOID_CONSTANT_DATASOURCE",
+                    "messageText": "Use 'dbtype' or one of: 'APPLICATION.legacy_dsn, APPLICATION.mysage_dsn, APPLICATION.mysage_lsn, APPLICATION.mssage_dsn' datasource in a query.",
+                    "severity": "WARNING"
+                },
+                {
+                    "code": "DATASOURCE_ON_DBTYPE_QUERY",
+                    "messageText": "Do not use DataSource on DbType 'query'.",
+                    "severity": "WARNING"
+                }
+            ],
+            "parameter": []
+        },
+        {
+            "name": "SpaceInTag",
+            "message": [
+                {
+                    "code": "AVOID_SPACE_IN_TAG",
+                    "messageText": "Don't use space in CF Tag.",
+                    "severity": "WARNING"
+                }
+            ],
+            "parameter": []
+        },
+        {
+            "name": "LoopChecker",
+            "message": [
+                {
+                    "code": "LOOP_ITEM_SPACE",
+                    "messageText": "In CFLOOP 'item' do not use space.",
+                    "severity": "WARNING"
+                }
+            ],
+            "parameter": []
+        },
+        {
+            "name": "QueryTimeoutChecker",
+            "message": [
+                {
+                    "code": "USE_TIMEOUT_WITH_MULTIPLIER",
+                    "messageText": "Use 'timeout' attribute with '#APPLICATION.sql_query_timeout_multiplier#' in a query.",
+                    "severity": "WARNING"
+                },
+                {
+                    "code": "USE_TIMEOUT",
+                    "messageText": "Use 'timeout' attribute in every query.",
+                    "severity": "WARNING"
+                }
+            ],
+            "parameter": []
+        },
+        {
+            "name": "QueryInLoopChecker",
+            "message": [
+                {
+                    "code": "AVOID_QUERY_IN_LOOP",
+                    "messageText": "Avoid using QUERY in loop.",
+                    "severity": "WARNING"
+                }
+            ],
+            "parameter": []
+        },
+        {
+            "name": "SpaceInHtmlTagId",
+            "message": [
+                {
+                    "code": "AVOID_SPACE_IN_HTML_ID",
+                    "messageText": "Space in id lead to js error.",
+                    "severity": "ERROR"
+                }
+            ],
+            "parameter": []
+        },
+        {
+            "name": "QueryChecker",
+            "message": [
+                {
+                    "code": "SQL_SELECT_STAR",
+                    "messageText": "Avoid using 'select *' in a query.",
+                    "severity": "WARNING"
+                },
+                {
+                    "code": "SQL_VARCHAR_DIMENSION",
+                    "messageText": "Always specify length value (n) when cast to varchar/nvarchar.",
+                    "severity": "WARNING"
+                },
+                {
+                    "code": "MISSING_ORDER_BY_IN_QUERY",
+                    "messageText": "Possible, you missed up 'ORDER BY' in a query.",
+                    "severity": "WARNING"
+                },
+                {
+                    "code": "AVOID_USING_NOLOCK",
+                    "messageText": "Avoid using 'WITH(NOLOCK)' in a query.",
+                    "severity": "WARNING"
+                },
+                {
+                    "code": "SQL_IMPLICIT_IDENTITY",
+                    "messageText": "Use 'SCOPE_IDENTITY()' instead. You could get a value from a trigger, instead of your current statement.",
+                    "severity": "WARNING"
+                },
+                {
+                    "code": "QUERY_EXIST",
+                    "messageText": "Not a bug. To fulfill SVN Navigator.",
+                    "severity": "INFO"
+                },
+                {
+                    "code": "SQL_DEPRECATED_CODE",
+                    "messageText": "Avoid using ntext|text|image. Use nvarchar(max), varchar(max), varbinary(max).",
+                    "severity": "WARNING"
+                },
+                {
+                    "code": "AVOID_UNNAMED_CONSTRAINT_IN_QUERY",
+                    "messageText": "Avoid creating constraint without name.",
+                    "severity": "WARNING"
+                },
+                {
+                    "code": "AVOID_PARAM_FOR_ROUND_SQL",
+                    "messageText": "Avoid using static 'ROUND' param without 'CAST', 'cfqueyparam'.",
+                    "severity": "WARNING"
+                },
+                {
+                    "code": "AVOID_USING_USE_IN_QUERY",
+                    "messageText": "Avoid using 'use [table]' in a query.",
+                    "severity": "WARNING"
+                }
+            ],
+            "parameter": []
         }
     ],
     "ruleGroup": [
@@ -1010,7 +1272,10 @@
                 "OUTPUT_ATTR",
                 "MISSING_VAR",
                 "COMPARE_INSTEAD_OF_ASSIGN",
-                "AVOID_USING_ISDATE"
+                "AVOID_USING_ISDATE",
+                "USE_MTEAM_DATA_FORMAT",
+                "LOOP_ITEM_SPACE",
+                "AVOID_SPACE_IN_HTML_ID"
             ]
         },
         {
@@ -1025,7 +1290,8 @@
                 "UNUSED_METHOD_ARGUMENT",
                 "UNQUOTED_STRUCT_KEY",
                 "STRUCT_ARRAY_NOTATION",
-                "USE_DISPLAY_NAME"
+                "USE_DISPLAY_NAME",
+                "UNUSED_GLOBAL_VARIABLE"
             ]
         },
         {
@@ -1046,7 +1312,24 @@
                 "AVOID_USING_DEBUG_ATTR",
                 "AVOID_USING_CFSETTING_DEBUG",
                 "AVOID_USING_CFINCLUDE_TAG",
-                "AVOID_USING_ISDEBUGMODE"
+                "AVOID_USING_ISDEBUGMODE",
+                "AVOID_USING_LSDATEFORMAT",
+                "AVOID_USING_LSPARSEDATETIME",
+                "AVOID_USING_LSTIMEFORMAT",
+                "AVOID_USING_USE_IN_QUERY",
+                "USE_CFQUERYPARAM",
+                "AVOID_SESSION_IN_JOB",
+                "SQL_IMPLICIT_IDENTITY",
+                "AVOID_CONSTANT_DATASOURCE",
+                "NOT_VALID_CFQUERYPARAM",
+                "DATASOURCE_ON_DBTYPE_QUERY",
+                "USE_TIMEOUT_WITH_MULTIPLIER",
+                "AVOID_USING_NOLOCK",
+                "SQL_VARCHAR_DIMENSION",
+                "SQL_DEPRECATED_CODE",
+                "USE_END_TAG",
+                "AVOID_UNNAMED_CONSTRAINT_IN_QUERY",
+                "AVOID_QUERY_IN_LOOP"
             ]
         },
         {
@@ -1127,7 +1410,10 @@
             "name": "Experimental",
             "message": [
                 "NEVER_USE_QUERY_IN_CFM",
-                "FILE_SHOULD_START_WITH_LOWERCASE"
+                "FILE_SHOULD_START_WITH_LOWERCASE",
+                "AVOID_PARAM_FOR_ROUND_SQL",
+                "QUERY_EXIST",
+                "MISSING_ORDER_BY_IN_QUERY"
             ]
         }
     ]

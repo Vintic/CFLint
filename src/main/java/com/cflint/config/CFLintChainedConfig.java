@@ -9,7 +9,7 @@ import com.cflint.plugins.CFLintScanner;
 
 public class CFLintChainedConfig extends BaseConfig{
 
-    private final CFLintConfig config;
+    public final CFLintConfig config;
     private final CFLintConfiguration parent;
 
     public CFLintChainedConfig(final CFLintConfiguration config) {

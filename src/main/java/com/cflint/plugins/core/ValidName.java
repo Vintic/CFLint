@@ -126,8 +126,8 @@ public class ValidName {
     		return false;
     	}
         boolean caseOk = ("PascalCase".equalsIgnoreCase(caseType)? isPascalCase(name) : isCamelCase(name));
-        return !validChars(name) //|| endsInNumber(name)
-                || !(isSameCase(name) || caseOk || usesUnderscores(name));
+        return !validChars(name); //|| endsInNumber(name)
+                //|| !(isSameCase(name) || caseOk || usesUnderscores(name));
     }
 
     /**
@@ -141,8 +141,8 @@ public class ValidName {
     		return false;
     	}
         boolean caseOk = ("PascalCase".equalsIgnoreCase(caseType)? isPascalCase(name) : isCamelCase(name));
-        return !validChars(name) || endsInNumber(name)
-                || !(isUpperCase(name) || isPascalCase(name) || usesUnderscores(name));
+        return !validChars(name);// || endsInNumber(name)
+                //|| !(isUpperCase(name) || isPascalCase(name) || usesUnderscores(name));
     }
 
     /**
@@ -150,12 +150,13 @@ public class ValidName {
      *
      * @param name name of variable.
      * @return true if the name consists of valid chartacters, false if it does not.
+     *  / - is required for checking component name
      */
     public boolean validChars(final String name) {
     	if(name == null) {
     		return true;
     	}
-        final Pattern valid = Pattern.compile("^[A-Za-z0-9_]+$");
+        final Pattern valid = Pattern.compile("^[A-Za-z0-9_#/]+$");
         return valid.matcher(name).matches();
     }
 

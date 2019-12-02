@@ -263,7 +263,7 @@ public class CFLintPluginInfo {
 
         @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "code")
         public static class PluginMessage {
-            private String code;
+            public String code;
             private String messageText;
             private Levels severity;
 

@@ -191,4 +191,15 @@ public class CFLintScannerAdapter implements CFLintScanner, CFLintStructureListe
     public void endFunction(final Context context, final BugList bugs) {
         //empty body for Adapter
     }
+
+    /**
+     * Count the number of new lines
+     * @param val  the string to count lines
+     * @param pos  the position to start
+     * @return          the number of new lines
+     */
+    public int countNewLinesUpTo(final String val, final int pos) {
+        final String x = pos > val.length() ? val : val.substring(0, pos);
+        return Math.max(0, x.split("\\R").length - 1);
+    }
 }

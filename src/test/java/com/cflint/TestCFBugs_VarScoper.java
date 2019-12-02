@@ -174,4 +174,17 @@ public class TestCFBugs_VarScoper {
         assertEquals(41, list.get(0).getOffset());
     }
 
+    @Test
+    public void test() throws CFLintScanException{
+        String src = "<cffunction name=\"processItem\">\n" +
+            "<cfset var i = \"This is local\">\n"+
+            "                <cfloop array=\"#LOCAL.errors#\" index=\"#i#\">\n" +
+            "                    <cfset LOCAL.error = LOCAL.errors[LOCAL.i]>\n" +
+            "                </cfloop>\n" +
+            "</cffunction>";
+        CFLintResult lintresult = cfBugs.scan(src, "test.cfc");
+        List<BugInfo> list = lintresult.getIssues().get("MISSING_VAR");
+        assertEquals(1, list.size());
+    }
+
 }
